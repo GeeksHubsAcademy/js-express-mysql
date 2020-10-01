@@ -15,22 +15,33 @@ const renderProducts = (products = []) => {
 const getProducts = async() => {
     try {
         let res = await fetch('http://localhost:3000');
-        console.log(res);
         let {
             products
         } = await res.json();
         renderProducts(products)
     } catch (error) {
-
+        console.error(error)
     }
 }
-const addProduct = (event) => {
-    event.preventDefault();
-    const product = {
-        name: event.target.name.value,
-        price: +event.target.price.value,
-        image_path: event.target.image_path.value
+const addProduct = async(event) => {
+    try {
+        event.preventDefault();
+        const product = {
+            name: event.target.name.value,
+            price: +event.target.price.value,
+            image_path: event.target.image_path.value
+        }
+        console.log(product)
+        let res = await fetch('http://localhost:3000', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(product)
+        });
+        getProducts();
+    } catch (error) {
+        console.error(error);
     }
-    console.log(product)
 }
 getProducts();
