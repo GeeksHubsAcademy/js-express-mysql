@@ -26,20 +26,22 @@ const getProducts = async() => {
 const addProduct = async(event) => {
     try {
         event.preventDefault();
+        const form = event.target;
         const product = {
-            name: event.target.name.value,
-            price: +event.target.price.value,
-            image_path: event.target.image_path.value
-        }
-        console.log(product)
-        let res = await fetch('http://localhost:3000', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(product)
-        });
+                name: form.name.value,
+                price: +form.price.value,
+                image_path: form.image_path.value
+            }
+            // let res = await fetch('http://localhost:3000', {
+            //     method: 'POST',
+            //     headers: {
+            //         'Content-Type': 'application/json'
+            //     },
+            //     body: JSON.stringify(product)
+            // });
+        await axios.post('http://localhost:3000', product);
         getProducts();
+        form.reset(); //limpiar los inputs del form
     } catch (error) {
         console.error(error);
     }
