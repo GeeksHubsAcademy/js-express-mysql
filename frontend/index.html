@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Products</title>
+    <link rel="stylesheet" href="css/style.css">
     <script src="js/script.js" async></script>
 </head>
 
@@ -12,6 +13,12 @@
     <div class="products">
 
     </div>
+    <form class="add-product-form" onsubmit="addProduct(event)">
+        <input type="text" name="name" placeholder="Introduce el nombre">
+        <input type="number" name="price" step="0.01" placeholder="Introduce el precio">
+        <input type="text" name="image_path" placeholder="Introduce la ruta de la imagen">
+        <button type="submit">Añadir Product</button>
+    </form>
 </body>
 
 </html>
